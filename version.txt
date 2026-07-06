@@ -1,1 +1,1 @@
-Version: demo note
+New version: 2.0 beta
