@@ -1,1 +1,1 @@
-Version: demo note
+news version 1.0
