@@ -1,0 +1,27 @@
+name: CI Pipeline
+
+# WHEN will start: on push in any branch and PR 
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # ON WHICH OC should this be run
+
+    steps:
+      # step-1: Download the rep code to VirtualM.
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # step-2: Show projects struct
+      - name: List files
+        run: ls -la
+
+      # step-3: Mock tests (to be replaced by real test later)
+      - name: Run a check
+        run: |
+          echo "Cheking porject..."
+          echo "Files in the repository:"
+          ls -1 | wc -l
+          echo "Check was done!"
