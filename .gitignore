@@ -4,7 +4,6 @@
 secrets/
 
 # зависимости
-node_modules
 node_modules/
 venv/
 __pycache__/
@@ -16,7 +15,7 @@ __pycache__/
 # файлы IDE и OC
 .vscode/
 .idea/
-.DB_Store
+.DS_Store
 
 # terraform state
 *.tfstate
