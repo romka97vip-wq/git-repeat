@@ -32,13 +32,13 @@ jobs:
 
       # step-3: Build Docker-image 
       - name: Build Docker image
-        run: docker build -t "ghcr.io/${{ github.repository }}:${{ github.sha }}" .
+        run: docker build -t "ghrc.io/${{ github.repository }}:${{ github.sha }}" .
 
       # step-4: Start container and check that it work
       - name: Test container runs
-        run: docker run --rm "ghcr.io${{ github.repository }}:${{ github.sha }}"
+        run: docker run --rm "ghrc.io${{ github.repository }}:${{ github.sha }}"
 
       # push image in registry (only for main branch) not PR
-      - name: Push image to GHCR
+      - name: Push image to GHRC
         if: github.ref == 'refs/heads/main'
-        run: docker push "ghcr.io/${{ github.repository }}:${{ github.sha }}"
+        run: docker push "ghrc.io/${{ github.repository }}:${{ github.sha }}"
