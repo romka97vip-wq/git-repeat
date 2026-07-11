@@ -1,6 +1,5 @@
 name: CI Pipeline
 
-# WHEN will start: on push in any branch and PR 
 on:
   push:
   pull_request:
@@ -11,34 +10,29 @@ permissions:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest # ON WHICH OC should this be run
+    runs-on: ubuntu-latest
 
     steps:
-      # step-1: Download the rep code to VirtualM.
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # step-2: Check that python code is valid (simple test)
       - name: Check Python syntax
         run: python3 -m py_compile app.py
 
-      # log in Github Container Registry
-      - name: Log in GHRC
+      - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
-          registry: ghrc.io
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # step-3: Build Docker-image 
       - name: Build Docker image
-        run: docker build -t "ghrc.io/${{ github.repository }}:${{ github.sha }}" .
+        run: docker build -t "ghcr.io/${{ github.repository }}:${{ github.sha }}" ./
 
-      # step-4: Start container and check that it work
       - name: Test container runs
-        run: docker run --rm "ghrc.io/${{ github.repository }}:${{ github.sha }}"
+        run: docker run --rm "ghcr.io/${{ github.repository }}:${{ github.sha }}"
 
-      # push image in registry (only for main branch) not PR
-      - name: Push image to GHRC
+      - name: Push image to GHCR
         if: github.ref == 'refs/heads/main'
-        run: docker push "ghrc.io/${{ github.repository }}:${{ github.sha }}"
+        run: docker push "ghcr.io/${{ github.repository }}:${{ github.sha }}"
+
