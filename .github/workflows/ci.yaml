@@ -20,7 +20,7 @@ jobs:
 
       # step-3: Build Docker-image 
       - name: Build Docker image
-        run: docker build -t myapp:${{ github.sha  }}
+        run: docker build -t myapp:${{ github.sha }} .
 
       # step-4: Start container and check that it work
       - name: Test container runs
