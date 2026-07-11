@@ -14,14 +14,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # step-2: Show projects struct
-      - name: List files
-        run: ls -la
+      # step-2: Check that python code is valid (simple test)
+      - name: Check Python syntax
+        run: python3 -m py_compile app.py
 
-      # step-3: Mock tests (to be replaced by real test later)
-      - name: Run a check
-        run: |
-          echo "Cheking porject..."
-          echo "Files in the repository:"
-          ls -1 | wc -l
-          echo "Check was done!"
+      # step-3: Build Docker-image 
+      - name: Build Docker image
+        run: docker build -t myapp:${{ github.sha  }}
+
+      # step-4: Start container and check that it work
+      - name: Test container runs
+        run: docker run --rm myapp:${{ github.sha  }}
