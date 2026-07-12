@@ -1,0 +1,23 @@
+# секреты и переменные окружения
+.env
+*.env
+secrets/
+
+# зависимости
+node_modules/
+venv/
+__pycache__/
+
+# лог и временные файлы
+*.log
+*.tmp
+
+# файлы IDE и OC
+.vscode/
+.idea/
+.DS_Store
+
+# terraform state
+*.tfstate
+*.tfstate.*
+.terraform/
